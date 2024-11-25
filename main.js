@@ -11,9 +11,9 @@ kaboom({
 })
 
 // Spawning fonts, sounds and assets
+load.assets()
 load.fonts()
 load.sounds()
-load.assets()
 
 // Defining scenes 
 const scenes = {
@@ -21,7 +21,7 @@ const scenes = {
         uiManager.displayMainMenu()
     },
     controls: () => {
-
+        uiManager.displayControlsMenu()
     },
     1: () => {
 

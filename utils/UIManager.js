@@ -1,5 +1,6 @@
 class UIManager {
 
+    // Blinking Menu Text
     displayBlinkingUIMessage(content, position) {
         const message = add([
             text(content, {
@@ -19,11 +20,11 @@ class UIManager {
             await tween(
                 message.opacity,
                 0,
-                0.5,
+                0.8,
                 // We define that the opacity will varying according to the nextOpacityValue starting at 0
                 (nextOpacityValue) => message.opacity = nextOpacityValue,
                 //Calling this function at a certain rate
-                easings.linear
+                easings.easeInOut
             )
             message.enterState("flash-down")
         })
@@ -34,11 +35,11 @@ class UIManager {
             await tween(
                 message.opacity,
                 1,
-                0.5,
+                0.8,
                 // We define that the opacity will varying according to the nextOpacityValue starting at 0
                 (nextOpacityValue) => message.opacity = nextOpacityValue,
                 //Calling this function at a certain rate
-                easings.linear
+                easings.ease
             )
             message.enterState("flash-up")
         })
@@ -70,6 +71,7 @@ class UIManager {
 
     }
 
+    // How to play menu
     displayControlsMenu() {
         add([
             sprite("forest-background"),

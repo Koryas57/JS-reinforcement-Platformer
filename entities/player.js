@@ -1,4 +1,6 @@
 export class Player {
+    isRespawning = false
+
     // Giving a Vec2 as params is a better option
     constructor(
         posX,
@@ -49,8 +51,8 @@ export class Player {
 
             // By default the sprite is facing to the right
             this.gameObj.flipX = true
-            // Moving backward with negative speed
-            this.gameObj.move(-this.speed, 0)
+            // Moving backward with negative speed + not moving while respawning 
+            if (!this.isRespawning) this.gameObj.move(-this.speed, 0)
         })
 
         onKeyDown("right", () => {
@@ -59,14 +61,14 @@ export class Player {
 
             this.gameObj.flipX = false
             // Moving forward with positive speed
-            this.gameObj.move(this.speed, 0)
+            if (!this.isRespawning) this.gameObj.move(this.speed, 0)
         })
 
         onKeyDown("space", () => {
             // this.gameObj.jump(this.jumpForce) would make a Kirby like jumping
 
-            // Allow the gameObj to jump only if on the ground
-            if (this.gameObj.isGrounded()) {
+            // Allow the gameObj to jump only if on the ground and not respawning
+            if (this.gameObj.isGrounded() && !this.isRespawning) {
                 this.gameObj.jump(this.jumpForce)
                 play("jump")
             }
@@ -79,5 +81,27 @@ export class Player {
             }
         })
 
+    }
+
+    respawnPlayer() {
+        if (this.lives > 0) {
+            // Send the player to the initial pos if no more lives
+            this.gameObj.pos = vec2(this.initialX, this.initialY)
+            this.isRespawning = true
+            setTimeout(() => this.isRespawning = false, 500)
+        }
+    }
+
+    update() {
+        // If the player go below a certain point, we have to launch a respawn.
+        // Here we will check this condition every frame
+        onUpdate(() => {
+            if (this.gameObj.pos.y > 700) {
+                play("hit", { speed: 1.5 })
+                this.respawnPlayer()
+            }
+
+            if (this.gameObj.isGrounded) play("hit", { speed: 1.5 })
+        })
     }
 }

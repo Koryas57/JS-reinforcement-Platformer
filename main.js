@@ -48,10 +48,13 @@ const scenes = {
             false
         )
 
+        // Calling the update loop to check every frame
+        player.update()
+
         // Could have been an object instead of a function
         attachCamera(player.gameObj, 0, 200)
 
-        level1.drawWaves("water", "wave") // Type and animation as in the method
+        level1.drawWaves("water", "wave") // Type and animation params as in the method
     },
     2: () => {
 

@@ -83,5 +83,6 @@ export const load = {
     sounds: () => {
         loadSound("confirm-ui", "./sounds/confirm-ui.wav")
         loadSound("jump", "./sounds/jump.wav")
+        loadSound("hit", "./sounds/hit.wav")
     }
 } 

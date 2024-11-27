@@ -48,6 +48,9 @@ const scenes = {
             false
         )
 
+        //Enabling player to pass through "passthrough" platforms
+        player.enablePassthrough()
+
         // Calling the update loop to check every frame
         player.update()
 

@@ -41,6 +41,23 @@ export class Player {
         ])
     }
 
+    enablePassthrough() {
+        // with the area() component we have access to this oBPR function wich takes in, as a param, a callback, an other function and it will passes to it the current collision
+        this.gameObj.onBeforePhysicsResolve((collision) => {
+            // "passthrough" tag that we setted up in the tiles mapping
+            // if the tile contains the tag, player can passthrough it while jumping only
+            if (collision.target.is("passthrough") && this.gameObj.isJumping()) {
+                // Cancelling collision
+                collision.preventResolution()
+            }
+
+            // if the tile contains the tag, player can passthrough it while pressing down arrow only
+            if (collision.target.is("passthrough") && isKeyDown("down")) {
+                collision.preventResolution()
+            }
+        })
+    }
+
     // Logic for making the player move
     setPlayerControls() {
         // First param is the key that we want to listen on
@@ -100,8 +117,6 @@ export class Player {
                 play("hit", { speed: 1.5 })
                 this.respawnPlayer()
             }
-
-            if (this.gameObj.isGrounded) play("hit", { speed: 1.5 })
         })
     }
 }

@@ -16,6 +16,7 @@ export class Player {
         this.initialX = posX
         this.initialY = posY
         this.makePlayer()
+        this.setPlayerControls()
         this.speed = speed
         this.jumpForce = jumpForce
         this.lives = nbLives
@@ -35,5 +36,30 @@ export class Player {
             // Reference for .get function, if you give the tag, it returns all the game object with this tag
             "player",
         ])
+    }
+
+    // Logic for making the player move
+    setPlayerControls() {
+        // First param is the key that we want to listen on
+        // Second param is the callback, that will be called when KeyDown
+        onKeyDown("left", () => {
+            // curAnim() let us check which anim is currently playing
+            if (this.gameObj.curAnim() !== "run") this.gameObj.play("run") // .play on a game object is for animation, without game object, it is for playing sounds
+
+            // By default the sprite is facing to the right
+            this.gameObj.flipX = true
+            // Moving backward with negative speed
+            this.gameObj.move(-this.speed, 0)
+        })
+
+        onKeyDown("right", () => {
+            // if statement without brackets because on one line
+            if (this.gameObj.curAnim() !== "run") this.gameObj.play("run")
+
+            this.gameObj.flipX = false
+            // Moving forward with positive speed
+            this.gameObj.move(this.speed, 0)
+        })
+
     }
 }

@@ -66,7 +66,6 @@ export const load = {
                 idle: {
                     from: 0,
                     to: 3,
-                    speed: 16,
                     loop: true,
                 },
                 run: {

@@ -1,10 +1,12 @@
 import kaboom from "./libs/kaboom.mjs";
+
 import { load } from "./utils/loader.js";
 import { attachCamera } from "./utils/Camera.js";
 import { Level } from "./utils/Level.js";
+import { level1Config } from "./content/level1/config.js";
 import { level1Layout, level1Mappings } from "./content/level1/level1Layout.js";
-import { uiManager } from "./utils/UIManager.js";
 import { Player } from "./entities/player.js";
+import { uiManager } from "./utils/UIManager.js";
 
 
 // Canvas size
@@ -36,11 +38,12 @@ const scenes = {
 
         // Player parameters values
         const player = new Player(
-            1500,
-            100,
-            400,
-            650,
-            3,
+            // Easier to modify from a Config file
+            level1Config.playerStartPosX,
+            level1Config.playerStartPosY,
+            level1Config.playerSpeed,
+            level1Config.jumpForce,
+            level1Config.nbLives,
             1,
             false
         )

@@ -26,6 +26,7 @@ export class Player {
 
     // Store the game object as a propriety of the Player class, accessible with this.gameObj
     makePlayer() {
+        // Will create a game object with components that we write in 
         this.gameObj = add([
             sprite("player", { anim: "idle" }),
             area({ shape: new Rect(vec2(0, 3), 8, 8) }),
@@ -59,6 +60,23 @@ export class Player {
             this.gameObj.flipX = false
             // Moving forward with positive speed
             this.gameObj.move(this.speed, 0)
+        })
+
+        onKeyDown("space", () => {
+            // this.gameObj.jump(this.jumpForce) would make a Kirby like jumping
+
+            // Allow the gameObj to jump only if on the ground
+            if (this.gameObj.isGrounded()) {
+                this.gameObj.jump(this.jumpForce)
+                play("jump")
+            }
+        })
+
+        // Without a key as a first param, it will act on any keys
+        onKeyRelease(() => {
+            if (isKeyReleased("right") || isKeyReleased("left")) {
+                this.gameObj.play("idle")
+            }
         })
 
     }

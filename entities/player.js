@@ -1,4 +1,7 @@
 export class Player {
+
+    heightDelta = 0
+    isMoving = false
     isRespawning = false
 
     // Giving a Vec2 as params is a better option
@@ -70,6 +73,7 @@ export class Player {
             this.gameObj.flipX = true
             // Moving backward with negative speed + not moving while respawning 
             if (!this.isRespawning) this.gameObj.move(-this.speed, 0)
+            this.isMoving = true
         })
 
         onKeyDown("right", () => {
@@ -79,6 +83,8 @@ export class Player {
             this.gameObj.flipX = false
             // Moving forward with positive speed
             if (!this.isRespawning) this.gameObj.move(this.speed, 0)
+            this.isMoving = true
+
         })
 
         onKeyDown("space", () => {
@@ -95,6 +101,7 @@ export class Player {
         onKeyRelease(() => {
             if (isKeyReleased("right") || isKeyReleased("left")) {
                 this.gameObj.play("idle")
+                this.isMoving = false
             }
         })
 
@@ -113,9 +120,38 @@ export class Player {
         // If the player go below a certain point, we have to launch a respawn.
         // Here we will check this condition every frame
         onUpdate(() => {
+
+            // We compare the heightDelta to get the difference between the ascenscion and the descent of the gameObj jumping animation
+            this.heightDelta = this.previousHeight - this.gameObj.pos.y
+            this.previousHeight = this.gameObj.pos.y
+
             if (this.gameObj.pos.y > 700) {
                 play("hit", { speed: 1.5 })
                 this.respawnPlayer()
+            }
+
+            // We want to play the idle animation if the player is not moving the gameObj
+            if (!this.isMoving &&
+                this.gameObj.curAnim() !== "idle"
+            ) {
+                this.gameObj.play("idle")
+            }
+
+            // We keep track of the first frame coordinate and we do a substraction, then if the result is positive or negative, we know if the gameObj is ascending or descending while jumping
+            if (!this.gameObj.isGrounded() &&
+                this.heightDelta > 0 &&
+                // Checking if another animation isn't currently playing
+                this.gameObj.curAnim() !== "jump"
+            ) {
+                this.gameObj.play("jump-up")
+            }
+
+            // If the heightDelta is positive, the gameObj is falling
+            if (!this.gameObj.isGrounded() &&
+                this.heightDelta < 0 &&
+                this.gameObj.curAnim() !== "jump-down"
+            ) {
+                this.gameObj.play("jump-down")
             }
         })
     }

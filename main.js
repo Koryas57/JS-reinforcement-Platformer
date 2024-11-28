@@ -48,8 +48,12 @@ const scenes = {
             false
         )
 
-        //Enabling player to pass through "passthrough" platforms
+
+        // Enabling player to pass through "passthrough" platforms
         player.enablePassthrough()
+
+        // Enabling player to pick up coin
+        player.enableCoinPickUp()
 
         // Calling the update loop to check every frame
         player.update()

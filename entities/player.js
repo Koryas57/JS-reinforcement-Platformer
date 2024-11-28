@@ -4,6 +4,7 @@ export class Player {
     isMoving = false
     isRespawning = false
     coyoteLapse = 0.1
+    coins = 0
 
     // Giving a Vec2 as params is a better option
     constructor(
@@ -59,6 +60,17 @@ export class Player {
             if (collision.target.is("passthrough") && isKeyDown("down")) {
                 collision.preventResolution()
             }
+        })
+    }
+
+    enableCoinPickUp() {
+        // We specify the tag of the object we want to collide with
+        // Then in case of collision we execute a callback 
+        // We can use the tag as a param to allow the exchange with the Kaboom destroy function that will take the param as a reference to execute the function on it
+        this.gameObj.onCollide("coin", (coin) => {
+            this.coins++
+            destroy(coin)
+            play("coin")
         })
     }
 

@@ -3,6 +3,7 @@ export class Player {
     heightDelta = 0
     isMoving = false
     isRespawning = false
+    coyoteLapse = 0.1
 
     // Giving a Vec2 as params is a better option
     constructor(
@@ -91,10 +92,16 @@ export class Player {
             // this.gameObj.jump(this.jumpForce) would make a Kirby like jumping
 
             // Allow the gameObj to jump only if on the ground and not respawning
-            if (this.gameObj.isGrounded() && !this.isRespawning) {
-                this.gameObj.jump(this.jumpForce)
-                play("jump")
-            }
+            if (!this.gameObj.isGrounded() && this.hasJumpedOnce) return
+
+            // Coyote Time for Jumps
+            // If the time result > than our settled delay(coyoteLapse) we allow a late jump for making the game more forgiving
+            if (time() - this.timeSinceLastGrounded > this.coyoteLapse) return
+
+            // Updating the hasJumpedOnce state after jumping
+            this.gameObj.jump(this.jumpForce)
+            play("jump")
+            this.hasJumpedOnce = true
         })
 
         // Without a key as a first param, it will act on any keys
@@ -120,6 +127,14 @@ export class Player {
         // If the player go below a certain point, we have to launch a respawn.
         // Here we will check this condition every frame
         onUpdate(() => {
+
+            // Checking if the player has already jumped once in order to use Coyote Time for jumps
+            if (this.gameObj.isGrounded()) {
+                this.hasJumpedOnce = false
+                // We get a time indicator to use it for our delay in Coyote Time
+                this.timeSinceLastGrounded = time()
+
+            }
 
             // We compare the heightDelta to get the difference between the ascenscion and the descent of the gameObj jumping animation
             this.heightDelta = this.previousHeight - this.gameObj.pos.y

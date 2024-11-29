@@ -105,5 +105,15 @@ export class Spider {
         }
     }
 
-
+    enablePassThrough() {
+        for (const spider of this.spiders) {
+            spider.onBeforePhysicsResolve((collision) => {
+                // If the element is a passthrough one, the spider will passthrough if jumping
+                if (collision.target.is("passthrough") &&
+                    spider.isJumping()) {
+                    collision.preventResolution()
+                }
+            })
+        }
+    }
 }

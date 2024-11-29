@@ -66,14 +66,16 @@ const scenes = {
         // Spawning spiders
         // Spiders are bigger than tiles so we cannot define them in the level layout
         const spiders = new Spider(
-            [vec2(2000, 300)],
-            [300],
-            [2],
-            1
+            // Mapping the spiderPositions array
+            level1Config.spiderPositions.map(spiderPos => spiderPos()),
+            level1Config.spiderRanges,
+            level1Config.spiderDurations,
+            level1Config.spiderType,
         )
 
         // Spiders AI
         spiders.setMovementPattern()
+        spiders.enablePassThrough()
 
         // Could have been an object instead of a function
         attachCamera(player.gameObj, 0, 200)

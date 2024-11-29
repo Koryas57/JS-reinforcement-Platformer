@@ -177,7 +177,10 @@ class UIManager {
         })
     }
 
-
+    // Dark background for UI Scoreboard
+    addDarkBg() {
+        add([rect(270, 130), color(0, 0, 0), fixed()]) // or color(Color.fromHex('#fffff'))
+    }
 }
 
 export const uiManager = new UIManager();

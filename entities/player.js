@@ -128,6 +128,8 @@ export class Player {
 
     respawnPlayer() {
         if (this.lives > 0) {
+            // Losing a life after each respawn
+            this.lives--
             // Send the player to the initial pos if no more lives
             this.gameObj.pos = vec2(this.initialX, this.initialY)
             this.isRespawning = true

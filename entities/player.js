@@ -14,10 +14,10 @@ export class Player {
         jumpForce,
         nbLives,
         currentLevelScene,
-        isInTerminalScene
+        isInFinalLevel
     ) {
         // With "this" we can create an attribute method that could be used out of the Player scope
-        this.isInTerminalScene = isInTerminalScene
+        this.isInFinalLevel = isInFinalLevel
         this.currentLevelScene = currentLevelScene
         // Setting the initial spawning position
         this.initialX = posX
@@ -134,7 +134,10 @@ export class Player {
             this.gameObj.pos = vec2(this.initialX, this.initialY)
             this.isRespawning = true
             setTimeout(() => this.isRespawning = false, 500)
+            return
         }
+
+        go("gameover")
     }
 
     update() {
@@ -194,6 +197,10 @@ export class Player {
     updateCoinCount(coinCountUI) {
         onUpdate(() => {
             coinCountUI.text = `${this.coins} / ${coinCountUI.fullCoinCount}`
+            // Redirecting the player to the next level if fullCoinCount
+            if (this.coins === coinCountUI.fullCoinCount) {
+                go(this.isInFinalLevel ? "end" : this.currentLevelScene + 1)
+            }
         })
     }
 }

@@ -67,6 +67,7 @@ const scenes = {
 
 
         // Displaying the scoreboard
+        uiManager.addDarkBg()
         uiManager.displayCoinCount()
         player.updateCoinCount(uiManager.coinCountUI)
         uiManager.displayLivesCount()

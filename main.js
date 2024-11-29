@@ -60,8 +60,12 @@ const scenes = {
         // Enabling player to pick up coin
         player.enableCoinPickUp()
 
+        //Activate collision with mobs
+        player.enableMobVulnerability()
+
         // Calling the update loop to check every frame
         player.update()
+
 
         // Spawning spiders
         // Spiders are bigger than tiles so we cannot define them in the level layout

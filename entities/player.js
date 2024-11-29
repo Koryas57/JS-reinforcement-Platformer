@@ -140,6 +140,16 @@ export class Player {
         go("gameover")
     }
 
+    // Enable collision with mobs
+    enableMobVulnerability() {
+        // The context event(a collision actually) execute the respawn on the player if the gameObj(player) collide with the first param("spiders")
+        function hitAndRespawn(context) {
+            play("hit", { speed: 1.5 })
+            context.respawnPlayer()
+        }
+        this.gameObj.onCollide("spiders", () => hitAndRespawn(this))
+    }
+
     update() {
         // If the player go below a certain point, we have to launch a respawn.
         // Here we will check this condition every frame

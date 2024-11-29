@@ -11,6 +11,7 @@ import { level3Config } from "./content/level3/config.js"
 import { level3Layout, level3Mappings } from "./content/level3/level3Layout.js";
 import { Player } from "./entities/player.js";
 import { uiManager } from "./utils/UIManager.js";
+import { Spider } from "./entities/Spiders.js";
 
 
 // Canvas size
@@ -62,7 +63,17 @@ const scenes = {
         // Calling the update loop to check every frame
         player.update()
 
+        // Spawning spiders
+        // Spiders are bigger than tiles so we cannot define them in the level layout
+        const spiders = new Spider(
+            [vec2(2000, 300)],
+            [300],
+            [2],
+            1
+        )
 
+        // Spiders AI
+        spiders.setMovementPattern()
 
         // Could have been an object instead of a function
         attachCamera(player.gameObj, 0, 200)

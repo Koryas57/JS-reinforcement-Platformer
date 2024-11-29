@@ -185,6 +185,22 @@ export const load = {
                 "jump-down": 9,
             },
         })
+        loadSprite("spider-1", "./assets/Spider_1.png", {
+            sliceX: 3,
+            sliceY: 1,
+            anims: {
+                crawl: { from: 0, to: 2, loop: true },
+                idle: 0,
+            }
+        })
+        loadSprite("spider-2", "./assets/Spider_2.png", {
+            sliceX: 3,
+            sliceY: 1,
+            anims: {
+                crawl: { from: 0, to: 2, loop: true },
+                idle: 0,
+            }
+        })
 
     },
     sounds: () => {
@@ -192,5 +208,6 @@ export const load = {
         loadSound("jump", "./sounds/jump.wav")
         loadSound("hit", "./sounds/hit.wav")
         loadSound("coin", "./sounds/coin.wav")
+        loadSound("spider-attack", "./sounds/spider-attack.mp3")
     }
 } 

@@ -64,9 +64,9 @@ export class Player {
     }
 
     enableCoinPickUp() {
-        // We specify the tag of the object we want to collide with
+        // We specify the tag of the object we want to collide with as the first param
         // Then in case of collision we execute a callback 
-        // We can use the tag as a param to allow the exchange with the Kaboom destroy function that will take the param as a reference to execute the function on it
+        // We can use the tag as a second param to allow the exchange with the Kaboom destroy function that will take the param as a reference to execute the function on it
         this.gameObj.onCollide("coin", (coin) => {
             this.coins++
             destroy(coin)
@@ -180,6 +180,18 @@ export class Player {
             ) {
                 this.gameObj.play("jump-down")
             }
+        })
+    }
+
+    updateLives(livesCountUI) {
+        onUpdate(() => {
+            livesCountUI.text = this.lives
+        })
+    }
+
+    updateCoinCount(coinCountUI) {
+        onUpdate(() => {
+            coinCountUI.text = `${this.coins} / ${coinCountUI.fullCoinCount}`
         })
     }
 }

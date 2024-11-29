@@ -1,5 +1,49 @@
 class UIManager {
 
+    displayLivesCount(player) {
+        this.livesCountUI = add([
+            text("", {
+                font: "Round",
+                size: 50,
+            }),
+            fixed(),
+            pos(70, 10)
+        ])
+
+        this.livesCountUI.add([
+            sprite("star-icon"),
+            pos(-60, -5),
+            scale(3),
+            fixed()
+        ])
+    }
+
+    displayCoinCount(player) {
+        this.coinCountUI = add([
+            // Give later access to text property onUpdate
+            text("", {
+                font: "Round",
+                size: 50,
+            }),
+            {
+                // We add property to the gameObj by adding an object
+                // We want the number of the returned array to totalize coins
+                fullCoinCount: get("coin", { recursive: true }).length
+            },
+            fixed(),
+            pos(70, 70)
+        ])
+
+        // Giving the UI a child gameObj
+        this.coinCountUI.add([
+            sprite("coin-icon"),
+            // Relative to the parent
+            pos(-60, 0),
+            scale(3),
+            fixed()
+        ])
+    }
+
     // Blinking Menu Text
     displayBlinkingUIMessage(content, position) {
         const message = add([
@@ -132,6 +176,8 @@ class UIManager {
             go(1)
         })
     }
+
+
 }
 
 export const uiManager = new UIManager();

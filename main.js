@@ -58,10 +58,21 @@ const scenes = {
         // Calling the update loop to check every frame
         player.update()
 
+
+
         // Could have been an object instead of a function
         attachCamera(player.gameObj, 0, 200)
 
         level1.drawWaves("water", "wave") // Type and animation params as in the method
+
+
+        // Displaying the scoreboard
+        uiManager.displayCoinCount()
+        player.updateCoinCount(uiManager.coinCountUI)
+        uiManager.displayLivesCount()
+        player.updateLives(uiManager.livesCountUI)
+
+
     },
     2: () => {
 

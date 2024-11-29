@@ -57,6 +57,8 @@ export const load = {
                 }
             },
         })
+        loadSprite("coin-icon", "./assets/Coins_UI.png")
+        loadSprite("star-icon", "./assets/Stars_Ui.png")
         loadSprite("coin", "./assets/Coin.png")
         loadSprite("bridge", "./assets/Bridge.png")
         loadSprite("player", "./assets/Player.png", {

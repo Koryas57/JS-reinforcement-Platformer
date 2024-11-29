@@ -5,6 +5,8 @@ import { attachCamera } from "./utils/Camera.js";
 import { Level } from "./utils/Level.js";
 import { level1Config } from "./content/level1/config.js";
 import { level1Layout, level1Mappings } from "./content/level1/level1Layout.js";
+import { level2Config } from "./content/level2/config.js"
+import { level2Layout, level2Mappings } from "./content/level2/level2Layout.js";
 import { Player } from "./entities/player.js";
 import { uiManager } from "./utils/UIManager.js";
 
@@ -76,6 +78,49 @@ const scenes = {
 
     },
     2: () => {
+        setGravity(1400)
+
+        const level2 = new Level()
+        level2.drawBackground("castle-background")
+        level2.drawMapLayout(level2Layout, level2Mappings)
+
+        // Player parameters values
+        const player = new Player(
+            // Easier to modify from a Config file
+            level2Config.playerStartPosX,
+            level2Config.playerStartPosY,
+            level2Config.playerSpeed,
+            level2Config.jumpForce,
+            level2Config.nbLives,
+            2,
+            false
+        )
+
+
+        // Enabling player to pass through "passthrough" platforms
+        player.enablePassthrough()
+
+        // Enabling player to pick up coin
+        player.enableCoinPickUp()
+
+        // Calling the update loop to check every frame
+        player.update()
+
+
+
+        // Could have been an object instead of a function
+        attachCamera(player.gameObj, 0, 200)
+
+        level2.drawWaves("lava", "wave") // Type and animation params as in the method
+
+
+        // Displaying the scoreboard
+        uiManager.addDarkBg()
+        uiManager.displayCoinCount()
+        player.updateCoinCount(uiManager.coinCountUI)
+        uiManager.displayLivesCount()
+        player.updateLives(uiManager.livesCountUI)
+
 
     },
     3: () => {

@@ -12,6 +12,7 @@ import { level3Layout, level3Mappings } from "./content/level3/level3Layout.js";
 import { Player } from "./entities/player.js";
 import { uiManager } from "./utils/UIManager.js";
 import { Spider } from "./entities/Spiders.js";
+import { Projectiles } from "./entities/Projectiles.js";
 
 
 // Canvas size
@@ -67,7 +68,7 @@ const scenes = {
         player.update()
 
 
-        // Spawning spiders
+        // Spawning Spiders
         // Spiders are bigger than tiles so we cannot define them in the level layout
         const spiders = new Spider(
             // Mapping the spiderPositions array
@@ -80,6 +81,17 @@ const scenes = {
         // Spiders AI
         spiders.setMovementPattern()
         spiders.enablePassThrough()
+
+        // Spawning Projectiles
+
+        const fish = new Projectiles(
+            level1Config.fishPositions.map(fishPos => fishPos()),
+            level1Config.fishRanges,
+            "fish"
+        )
+
+        fish.setMovementPattern()
+
 
         // Could have been an object instead of a function
         attachCamera(player.gameObj, 0, 200)

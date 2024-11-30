@@ -201,6 +201,20 @@ export const load = {
                 idle: 0,
             }
         })
+        loadSprite("fish", "./assets/Fish_1.png", {
+            sliceX: 2,
+            sliceY: 1,
+            anims: {
+                swim: { from: 0, to: 1, loop: true },
+            }
+        })
+        loadSprite("flame", "./assets/Flame_1.png", {
+            sliceX: 2,
+            sliceY: 1,
+            anims: {
+                burn: { from: 0, to: 1, loop: true },
+            }
+        })
 
     },
     sounds: () => {

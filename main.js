@@ -13,6 +13,7 @@ import { Player } from "./entities/player.js";
 import { uiManager } from "./utils/UIManager.js";
 import { Spider } from "./entities/Spiders.js";
 import { Projectiles } from "./entities/Projectiles.js";
+import { Axes } from "./entities/Axes.js";
 
 
 // Canvas size
@@ -159,6 +160,14 @@ const scenes = {
             level2Config.flameRanges,
             "flame"
         )
+
+        // Spawning Axes
+
+        const axes = new Axes(
+            level2Config.axesPositions.map(axePos => axePos()),
+            level2Config.axesSwingDurations
+        )
+        axes.setMovementPattern()
 
         flames.setMovementPattern()
 

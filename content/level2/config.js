@@ -30,4 +30,11 @@ export const level2Config = {
     spiderRanges: [300, 150, 150, 300, 300],
     spiderDurations: [2, 1, 1, 2, 2],
     spiderType: 2,
+    axesPositions: [
+        () => vec2(2100, -50),
+        () => vec2(7000, 10),
+        () => vec2(7300, 10),
+        () => vec2(7600, 10),
+    ],
+    axesSwingDurations: [1, 2, 3, 2]
 }

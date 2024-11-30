@@ -150,6 +150,7 @@ export class Player {
         this.gameObj.onCollide("spiders", () => hitAndRespawn(this))
         this.gameObj.onCollide("fish", () => hitAndRespawn(this))
         this.gameObj.onCollide("flame", () => hitAndRespawn(this))
+        this.gameObj.onCollide("axes", () => hitAndRespawn(this))
     }
 
     update() {

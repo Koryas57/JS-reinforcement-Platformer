@@ -18,7 +18,7 @@ export class Projectiles {
                     scale(4),
                     rotate(type === "fish" ? 90 : 0),
                     // First param is the default state
-                    state("launch", ["launch", "rotate", "fall"]),
+                    state("launch", ["launch", "fall"]),
                     offscreen(),
                     type
                 ]))

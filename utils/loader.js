@@ -215,6 +215,7 @@ export const load = {
                 burn: { from: 0, to: 1, loop: true },
             }
         })
+        loadSprite("axe", "./assets/Axe_Trap.png")
 
     },
     sounds: () => {
@@ -223,5 +224,6 @@ export const load = {
         loadSound("hit", "./sounds/hit.wav")
         loadSound("coin", "./sounds/coin.wav")
         loadSound("spider-attack", "./sounds/spider-attack.mp3")
+        loadSound("swinging-axe", "./sounds/swinging-axe.mp3")
     }
 } 

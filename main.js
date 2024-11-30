@@ -131,13 +131,36 @@ const scenes = {
         // Enabling player to pass through "passthrough" platforms
         player.enablePassthrough()
 
+        // Enable collision with enemies
+        player.enableMobVulnerability()
+
         // Enabling player to pick up coin
         player.enableCoinPickUp()
 
         // Calling the update loop to check every frame
         player.update()
 
+        // Spawing Spiders
+        const spiders = new Spider(
+            // Mapping the spiderPositions array
+            level2Config.spiderPositions.map(spiderPos => spiderPos()),
+            level2Config.spiderRanges,
+            level2Config.spiderDurations,
+            level2Config.spiderType,
+        )
 
+        // Spiders AI
+        spiders.setMovementPattern()
+        spiders.enablePassThrough()
+
+        // Spawning Flames
+        const flames = new Projectiles(
+            level2Config.flamePositions.map(flamePos => flamePos()),
+            level2Config.flameRanges,
+            "flame"
+        )
+
+        flames.setMovementPattern()
 
         // Could have been an object instead of a function
         attachCamera(player.gameObj, 0, 200)

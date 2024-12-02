@@ -165,7 +165,7 @@ export const load = {
 
         // Physical and Enemies Elements 
 
-        loadSprite("coin-icon", "./assets/Coins_UI.png")
+        loadSprite("coin-icon", "./assets/Coins_Ui.png")
         loadSprite("star-icon", "./assets/Stars_Ui.png")
         loadSprite("coin", "./assets/Coin.png")
         loadSprite("bridge", "./assets/Bridge.png")

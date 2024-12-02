@@ -39,6 +39,15 @@ const scenes = {
         uiManager.displayControlsMenu()
     },
     1: () => {
+
+        const waterAmbience = play("water-ambience", {
+            volume: 0.1,
+            loop: true,
+        })
+        onSceneLeave(() => {
+            waterAmbience.paused = true
+        })
+
         setGravity(1400)
 
         const level1 = new Level()
@@ -112,6 +121,16 @@ const scenes = {
 
     },
     2: () => {
+
+        const lavaAmbience = play("lava", {
+            volume: 1.2,
+            loop: true,
+        })
+        onSceneLeave(() => {
+            lavaAmbience.paused = true
+        })
+
+
         setGravity(1400)
 
         const level2 = new Level()
@@ -199,6 +218,15 @@ const scenes = {
 
     },
     3: () => {
+
+        const windAmbience = play("strong-wind", {
+            volume: 0.5,
+            loop: true,
+        })
+        onSceneLeave(() => {
+            windAmbience.paused = true
+        })
+
         setGravity(1400)
 
         const level3 = new Level()
@@ -244,10 +272,10 @@ const scenes = {
 
     },
     gameover: () => {
-
+        uiManager.displayGameOverScreen()
     },
     end: () => {
-
+        uiManager.displayEndGameScreen()
     },
 }
 
@@ -257,4 +285,4 @@ for (const key in scenes) {
     scene(key, scenes[key])
 }
 
-go(3)
+go("menu")

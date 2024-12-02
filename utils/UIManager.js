@@ -181,6 +181,47 @@ class UIManager {
     addDarkBg() {
         add([rect(270, 130), color(0, 0, 0), fixed()]) // or color(Color.fromHex('#fffff'))
     }
+
+    displayGameOverScreen() {
+        add([rect(1280, 720), color(0, 0, 0)]),
+            add([
+                text("Game Over !", { size: 50, font: "Round" }),
+                area(),
+                anchor("center"),
+                pos(center()),
+            ])
+
+        this.displayBlinkingUIMessage(
+            "Press [ Enter ] to Restart Game",
+            vec2(center().x, center().y + 100)
+        )
+
+        onKeyPress("enter", () => {
+            play("confirm-ui")
+            go("menu")
+        })
+    }
+
+    displayEndGameScreen() {
+        add([rect(1280, 720), color(0, 0, 0)]),
+            add([
+                text("You Won! Thanks for Playing", { size: 50, font: "Round" }),
+                area(),
+                anchor("center"),
+                pos(center()),
+            ])
+
+        this.displayBlinkingUIMessage(
+            "Press [ Enter ] to Restart Game",
+            vec2(center().x, center().y + 100)
+        )
+
+        onKeyPress("enter", () => {
+            play("confirm-ui")
+            go("menu")
+        })
+
+    }
 }
 
 export const uiManager = new UIManager();

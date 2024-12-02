@@ -24,7 +24,7 @@ export class Axes {
     }
 
     async swing(axe, targetAngle, swingDuration) {
-        if (!axe.isOffScreen()) play("swinging-axe")
+        if (!axe.isOffScreen()) play("swinging-axe", { volume: 0.5 })
 
         await tween(
             // angle property accessible from rotate() component

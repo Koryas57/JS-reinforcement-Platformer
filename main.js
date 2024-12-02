@@ -1,7 +1,7 @@
 import kaboom from "./libs/kaboom.mjs";
 
 import { load } from "./utils/loader.js";
-import { attachCamera } from "./utils/Camera.js";
+import { attachCamera } from "./utils/camera.js";
 import { Level } from "./utils/Level.js";
 import { level1Config } from "./content/level1/config.js";
 import { level1Layout, level1Mappings } from "./content/level1/level1Layout.js";

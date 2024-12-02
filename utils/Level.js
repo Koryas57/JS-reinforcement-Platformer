@@ -38,4 +38,30 @@ export class Level {
     drawBackground(bgSpriteName) {
         add([sprite(bgSpriteName), fixed(), scale(4)]) // Not effected by the camera
     }
+
+    drawScrollingBackground(bgSpriteName) {
+        const bgWidth = 320 // Replace with the actual width of your sprite in pixels
+        const scaleFactor = 4 // Same scale used for the background
+        const scaledWidth = bgWidth * scaleFactor
+
+        // Add two instances to simulate continuous scrolling
+        const bg1 = add([sprite(bgSpriteName), pos(0, 0), scale(scaleFactor), fixed()])
+        const bg2 = add([sprite(bgSpriteName), pos(scaledWidth, 0), scale(scaleFactor), fixed()])
+
+        // Continuous movement
+        onUpdate(() => {
+            const speed = 40 // Scrolling speed
+            bg1.pos.x -= speed * dt() // dt(), delta time represent the time since last frame
+            bg2.pos.x -= speed * dt()
+
+            // Reset position to loop the background
+            if (bg1.pos.x + scaledWidth <= 0) {
+                bg1.pos.x = bg2.pos.x + scaledWidth
+            }
+            if (bg2.pos.x + scaledWidth <= 0) {
+                bg2.pos.x = bg1.pos.x + scaledWidth
+            }
+        })
+    }
+
 }

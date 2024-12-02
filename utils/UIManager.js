@@ -92,8 +92,8 @@ class UIManager {
     // Main menu rendering
     displayMainMenu() {
         add([
-            sprite("forest-background"),
-            scale(4),
+            sprite("menuBg"),
+            scale(2),
         ])
         add([
             sprite("logo"),

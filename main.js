@@ -40,7 +40,7 @@ const scenes = {
         setGravity(1400)
 
         const level1 = new Level()
-        level1.drawBackground("forest-background")
+        level1.drawBackground("jungle")
         level1.drawMapLayout(level1Layout, level1Mappings)
 
         // Player parameters values
@@ -113,7 +113,7 @@ const scenes = {
         setGravity(1400)
 
         const level2 = new Level()
-        level2.drawBackground("castle-background")
+        level2.drawScrollingBackground("castle-background")
         level2.drawMapLayout(level2Layout, level2Mappings)
 
         // Player parameters values
@@ -190,9 +190,9 @@ const scenes = {
         setGravity(1400)
 
         const level3 = new Level()
-        level3.drawBackground("sky-background-0")
-        level3.drawBackground("sky-background-1")
-        level3.drawBackground("sky-background-2")
+        level3.drawScrollingBackground("sky-background-0")
+        level3.drawScrollingBackground("sky-background-1")
+        level3.drawScrollingBackground("sky-background-2")
         level3.drawMapLayout(level3Layout, level3Mappings)
 
         const player = new Player(

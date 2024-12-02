@@ -23,6 +23,7 @@ kaboom({
     width: 1280,
     height: 720,
     stretch: true,
+
 })
 
 // Spawning fonts, sounds and assets
@@ -32,20 +33,44 @@ load.sounds()
 
 // Defining scenes 
 const scenes = {
+
     menu: () => {
+
         uiManager.displayMainMenu()
+
+        const menuAmbience = play("menu-ambience", {
+            volume: 0.3,
+            loop: true,
+        })
+        onSceneLeave(() => {
+            menuAmbience.paused = true
+        })
     },
     controls: () => {
         uiManager.displayControlsMenu()
+
+        const menuAmbience = play("menu-ambience", {
+            volume: 0.3,
+            loop: true,
+        })
+        onSceneLeave(() => {
+            menuAmbience.paused = true
+        })
     },
     1: () => {
 
         const waterAmbience = play("water-ambience", {
-            volume: 0.1,
+            volume: 0.15,
+            loop: true,
+        })
+        const jungleAmbience = play("jungle-ambience", {
+            volume: 1,
+            seek: 10,
             loop: true,
         })
         onSceneLeave(() => {
             waterAmbience.paused = true
+            jungleAmbience.paused = true
         })
 
         setGravity(1400)
@@ -122,12 +147,17 @@ const scenes = {
     },
     2: () => {
 
-        const lavaAmbience = play("lava", {
-            volume: 1.2,
+        const lavaAmbience = play("lava-ambience", {
+            volume: 1,
+            loop: true,
+        })
+        const castleAmbience = play("castle-ambience", {
+            volume: 0.5,
             loop: true,
         })
         onSceneLeave(() => {
             lavaAmbience.paused = true
+            castleAmbience.paused = true
         })
 
 
@@ -220,11 +250,17 @@ const scenes = {
     3: () => {
 
         const windAmbience = play("strong-wind", {
-            volume: 0.5,
+            volume: 0.25,
+            loop: true,
+        })
+        const funnyAmbience = play("funny-ambience", {
+            volume: 0.4,
+            seek: 8.3,
             loop: true,
         })
         onSceneLeave(() => {
             windAmbience.paused = true
+            funnyAmbience.paused = true
         })
 
         setGravity(1400)

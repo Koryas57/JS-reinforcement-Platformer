@@ -242,8 +242,12 @@ export const load = {
         // Ambiences
 
         loadSound("water-ambience", "./sounds/water-ambience.mp3")
-        loadSound("lava", "./sounds/lava.wav")
+        loadSound("lava-ambience", "./sounds/lava.wav")
         loadSound("strong-wind", "./sounds/strong-wind.wav")
+        loadSound("jungle-ambience", "./sounds/Jungle.mp3")
+        loadSound("funny-ambience", "./sounds/FunnyLevel.mp3")
+        loadSound("castle-ambience", "./sounds/Castle.mp3")
+        loadSound("menu-ambience", "./sounds/ChillMenu.mp3")
 
     }
 } 

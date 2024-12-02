@@ -18,7 +18,7 @@ export const load = {
 
         loadSprite("jungle", "./assets/jungle.png")
         loadSprite("menuBg", "./assets/menuBg.png")
-        loadSprite("menuBg2", "./assets/menuBg2.png")
+        loadSprite("menuBg2", "./assets/menubg2.png")
         loadSprite("forest-background", "./assets/Forest_Background_0.png")
         loadSprite("castle-background", "./assets/Castle_Background_0.png")
         loadSprite("sky-background-0", "./assets/Sky_Background_0.png")

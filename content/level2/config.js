@@ -36,5 +36,7 @@ export const level2Config = {
         () => vec2(7300, 10),
         () => vec2(7600, 10),
     ],
-    axesSwingDurations: [1, 2, 3, 2]
+    axesSwingDurations: [1, 2, 3, 2],
+    sawsPositions: [() => vec2(8000, 350), () => vec2(9000, 350)],
+    sawsRanges: [300, 500],
 }

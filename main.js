@@ -14,6 +14,7 @@ import { uiManager } from "./utils/UIManager.js";
 import { Spider } from "./entities/Spiders.js";
 import { Projectiles } from "./entities/Projectiles.js";
 import { Axes } from "./entities/Axes.js";
+import { Saws } from "./entities/Saws.js";
 
 
 // Canvas size
@@ -161,6 +162,8 @@ const scenes = {
             "flame"
         )
 
+        flames.setMovementPattern()
+
         // Spawning Axes
 
         const axes = new Axes(
@@ -169,7 +172,15 @@ const scenes = {
         )
         axes.setMovementPattern()
 
-        flames.setMovementPattern()
+        // Spawning Saws
+
+        const saws = new Saws(
+            level2Config.sawsPositions.map(sawPos => sawPos()),
+            level2Config.sawsRanges
+        )
+
+        saws.setMovementPattern()
+
 
         // Could have been an object instead of a function
         attachCamera(player.gameObj, 0, 200)

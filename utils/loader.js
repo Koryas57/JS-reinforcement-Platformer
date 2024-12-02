@@ -219,6 +219,7 @@ export const load = {
             }
         })
         loadSprite("axe", "./assets/Axe_Trap.png")
+        loadSprite("saw", "./assets/Circular_Saw.png")
 
     },
     sounds: () => {
@@ -228,5 +229,6 @@ export const load = {
         loadSound("coin", "./sounds/coin.wav")
         loadSound("spider-attack", "./sounds/spider-attack.mp3")
         loadSound("swinging-axe", "./sounds/swinging-axe.mp3")
+        loadSound("saw", "./sounds/saw.wav")
     }
 } 

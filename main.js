@@ -15,6 +15,7 @@ import { Spider } from "./entities/Spiders.js";
 import { Projectiles } from "./entities/Projectiles.js";
 import { Axes } from "./entities/Axes.js";
 import { Saws } from "./entities/Saws.js";
+import { Birds } from "./entities/Birds.js";
 
 
 // Canvas size
@@ -218,7 +219,19 @@ const scenes = {
 
         player.enablePassthrough()
         player.enableCoinPickUp()
+        player.enableMobVulnerability()
         player.update()
+
+        // Spawning Birds 
+
+        const birds = new Birds(
+            level3Config.birdPositions.map(birdPos => birdPos()),
+            level3Config.birdRanges
+        )
+
+        birds.setMovementPattern()
+
+        // Scene 
 
         attachCamera(player.gameObj, 0, 200)
         level3.drawWaves("clouds", "wave")
@@ -244,4 +257,4 @@ for (const key in scenes) {
     scene(key, scenes[key])
 }
 
-go("menu")
+go(3)

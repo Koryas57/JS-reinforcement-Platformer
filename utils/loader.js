@@ -163,7 +163,7 @@ export const load = {
         })
 
 
-        // Physical Elements 
+        // Physical and Enemies Elements 
 
         loadSprite("coin-icon", "./assets/Coins_UI.png")
         loadSprite("star-icon", "./assets/Stars_Ui.png")
@@ -211,6 +211,13 @@ export const load = {
                 swim: { from: 0, to: 1, loop: true },
             }
         })
+        loadSprite("bird", "./assets/Bird_2.png", {
+            sliceX: 3,
+            sliceY: 1,
+            anims: {
+                fly: { from: 0, to: 2, speed: 9, loop: true },
+            }
+        })
         loadSprite("flame", "./assets/Flame_1.png", {
             sliceX: 2,
             sliceY: 1,
@@ -230,5 +237,6 @@ export const load = {
         loadSound("spider-attack", "./sounds/spider-attack.mp3")
         loadSound("swinging-axe", "./sounds/swinging-axe.mp3")
         loadSound("saw", "./sounds/saw.wav")
+        loadSound("dive", "./sounds/dive.wav")
     }
 } 

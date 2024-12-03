@@ -133,7 +133,7 @@ class UIManager {
         ])
 
         const controlPrompts = add([
-            pos(center().x + 30, center().y)
+            pos(center().x - 300, center().y)
         ])
 
         controlPrompts.add([
@@ -168,6 +168,32 @@ class UIManager {
         controlPrompts.add([
             text("Move", { font: "Round", size: 32 }),
             pos(10, 100),
+        ])
+
+        // Mobile controls
+
+        const mobileControlPrompts = add([
+            pos(center().x + 320, center().y)
+        ])
+
+        mobileControlPrompts.add([
+            sprite("ps4-jump"),
+            pos(30, -10),
+        ])
+
+        mobileControlPrompts.add([
+            sprite("ps4-cross"),
+            pos(-200, -12),
+        ])
+
+        mobileControlPrompts.add([
+            text("Jump", { font: "Round", size: 32 }),
+            pos(43, 100),
+        ])
+
+        mobileControlPrompts.add([
+            text("Move", { font: "Round", size: 32 }),
+            pos(-190, 100),
         ])
 
         this.displayBlinkingUIMessage(

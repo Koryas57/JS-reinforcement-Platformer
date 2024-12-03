@@ -108,6 +108,10 @@ class UIManager {
             vec2(center().x, center().y + 100)
         )
 
+        onKeyPress("f", (c) => {
+            setFullscreen(!isFullscreen())
+        })
+
         onKeyPress("enter", () => {
             play("confirm-ui", { speed: 1.5 })
             go("controls")

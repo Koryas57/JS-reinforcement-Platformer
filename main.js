@@ -22,7 +22,7 @@ import { Birds } from "./entities/Birds.js";
 kaboom({
     width: 1280,
     height: 720,
-    stretch: true,
+    canvas: document.querySelector("#mycanvas"),
 
 })
 

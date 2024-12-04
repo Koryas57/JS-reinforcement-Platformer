@@ -102,11 +102,6 @@ export class Player {
             this.hasJumpedOnce = true;
         };
 
-        const stopMovement = () => {
-            this.gameObj.play("idle");
-            this.isMoving = false;
-        };
-
         // Zone definitions
         const screenWidth = 1280; // Set your screen width here
         const screenHeight = 720; // Set your screen height here
@@ -153,10 +148,8 @@ export class Player {
 
         onKeyRelease(() => {
             jumpButton.use(scale(1));
-            if (isKeyReleased("right") || isKeyReleased("left")) {
-                stopMovement();
-                directionalCross.use(sprite("ps4-cross"));
-            }
+            directionalCross.use(sprite("ps4-cross"));
+            this.gameObj.play("idle")
         });
 
         // Mobile touch controls
@@ -201,7 +194,7 @@ export class Player {
             jumpButton.use(scale(1));
             this.isMovingLeft = false;
             this.isMovingRight = false;
-            stopMovement();
+            this.gameObj.play("idle")
             directionalCross.use(sprite("ps4-cross"));
             this.hasJumpedOnce = false;
         });
@@ -264,7 +257,7 @@ export class Player {
             this.heightDelta = this.previousHeight - this.gameObj.pos.y
             this.previousHeight = this.gameObj.pos.y
 
-            if (this.gameObj.pos.y > 700) {
+            if (this.gameObj.pos.y > 700 && !this.isRespawning) {
                 play("hit", { speed: 1.5 })
                 this.respawnPlayer()
             }
@@ -291,6 +284,12 @@ export class Player {
                 this.gameObj.curAnim() !== "jump-down"
             ) {
                 this.gameObj.play("jump-down")
+            }
+
+            if (this.gameObj.isGrounded() &&
+                this.gameObj.curAnim() == "jump-down"
+            ) {
+                this.gameObj.play("idle")
             }
         })
     }

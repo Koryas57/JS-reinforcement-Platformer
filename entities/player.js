@@ -76,54 +76,146 @@ export class Player {
 
     // Logic for making the player move
     setPlayerControls() {
-        // First param is the key that we want to listen on
-        // Second param is the callback, that will be called when KeyDown
-        onKeyDown("left", () => {
-            // curAnim() let us check which anim is currently playing
-            if (this.gameObj.curAnim() !== "run") this.gameObj.play("run") // .play on a game object is for animation, without game object, it is for playing sounds
+        // Helper functions for actions
+        const moveLeft = () => {
+            if (this.gameObj.curAnim() !== "run") this.gameObj.play("run");
+            directionalCross.use(sprite("ps4-left"));
+            this.gameObj.flipX = true;
+            if (!this.isRespawning) this.gameObj.move(-this.speed, 0);
+            this.isMoving = true;
+        };
 
-            // By default the sprite is facing to the right
-            this.gameObj.flipX = true
-            // Moving backward with negative speed + not moving while respawning 
-            if (!this.isRespawning) this.gameObj.move(-this.speed, 0)
-            this.isMoving = true
-        })
+        const moveRight = () => {
+            if (this.gameObj.curAnim() !== "run") this.gameObj.play("run");
+            directionalCross.use(sprite("ps4-right"));
+            this.gameObj.flipX = false;
+            if (!this.isRespawning) this.gameObj.move(this.speed, 0);
+            this.isMoving = true;
+        };
 
-        onKeyDown("right", () => {
-            // if statement without brackets because on one line
-            if (this.gameObj.curAnim() !== "run") this.gameObj.play("run")
+        const jump = () => {
+            if (!this.gameObj.isGrounded() && this.hasJumpedOnce) return;
+            if (time() - this.timeSinceLastGrounded > this.coyoteLapse) return;
+            this.gameObj.jump(this.jumpForce);
+            play("jump");
+            jumpButton.use(scale(1.25));
+            this.hasJumpedOnce = true;
+        };
 
-            this.gameObj.flipX = false
-            // Moving forward with positive speed
-            if (!this.isRespawning) this.gameObj.move(this.speed, 0)
-            this.isMoving = true
+        const stopMovement = () => {
+            this.gameObj.play("idle");
+            this.isMoving = false;
+        };
 
-        })
+        // Zone definitions
+        const screenWidth = 1280; // Set your screen width here
+        const screenHeight = 720; // Set your screen height here
 
-        onKeyDown("space", () => {
-            // this.gameObj.jump(this.jumpForce) would make a Kirby like jumping
+        const leftZone = {
+            xStart: 0,
+            xEnd: screenHeight / 2.65,
+            yStart: 0,
+            yEnd: screenHeight * 2,
+        };
 
-            // Allow the gameObj to jump only if on the ground and not respawning
-            if (!this.gameObj.isGrounded() && this.hasJumpedOnce) return
+        const leftHalfOfLeftZone = {
+            xStart: 0,
+            xEnd: leftZone.xEnd / 2,
+            yStart: 0,
+            yEnd: leftZone.yEnd,
+        };
 
-            // Coyote Time for Jumps
-            // If the time result > than our settled delay(coyoteLapse) we allow a late jump for making the game more forgiving
-            if (time() - this.timeSinceLastGrounded > this.coyoteLapse) return
+        const rightHalfOfLeftZone = {
+            xStart: leftZone.xEnd / 2,
+            xEnd: leftZone.xEnd,
+            yStart: 0,
+            yEnd: leftZone.yEnd,
+        };
 
-            // Updating the hasJumpedOnce state after jumping
-            this.gameObj.jump(this.jumpForce)
-            play("jump")
-            this.hasJumpedOnce = true
-        })
+        const rightZone = {
+            xStart: leftZone.xEnd,
+            xEnd: screenWidth + 200,
+            yStart: 0,
+            yEnd: leftZone.yEnd,
+        };
 
-        // Without a key as a first param, it will act on any keys
+        const isInZone = (pos, zone) => (
+            pos.x >= zone.xStart &&
+            pos.x <= zone.xEnd &&
+            pos.y >= zone.yStart &&
+            pos.y <= zone.yEnd
+        );
+
+        // Keyboard controls
+        onKeyDown("left", moveLeft);
+        onKeyDown("right", moveRight);
+        onKeyDown("space", jump);
+
         onKeyRelease(() => {
+            jumpButton.use(scale(1));
             if (isKeyReleased("right") || isKeyReleased("left")) {
-                this.gameObj.play("idle")
-                this.isMoving = false
+                stopMovement();
+                directionalCross.use(sprite("ps4-cross"));
             }
-        })
+        });
 
+        // Mobile touch controls
+
+        const directionalCross = add([
+            sprite("ps4-cross"),
+            pos(50, height() - 150),
+            area(),
+            fixed(),
+            z(1000),
+        ]);
+
+        const jumpButton = add([
+            sprite("ps4-jump"),
+            pos(width() - 75, height() - 80),
+            area(),
+            anchor("center"),
+            fixed(),
+            z(1000),
+        ]);
+
+
+
+        onTouchStart((touchPos) => {
+            console.log("Touch Position:", touchPos);
+
+            if (isInZone(touchPos, leftHalfOfLeftZone)) {
+                console.log("Move Left");
+                moveLeft();
+                this.isMovingLeft = true;
+            } else if (isInZone(touchPos, rightHalfOfLeftZone)) {
+                console.log("Move Right");
+                moveRight();
+                this.isMovingRight = true;
+            } else if (isInZone(touchPos, rightZone)) {
+                console.log("Jump");
+                jump();
+            }
+        });
+
+        onTouchEnd(() => {
+            jumpButton.use(scale(1));
+            this.isMovingLeft = false;
+            this.isMovingRight = false;
+            stopMovement();
+            directionalCross.use(sprite("ps4-cross"));
+            this.hasJumpedOnce = false;
+        });
+
+        // Continuous movement for touch
+        onUpdate(() => {
+            if (this.isMovingLeft && !this.isMovingRight) {
+                moveLeft();
+            }
+
+            if (this.isMovingRight && !this.isMovingLeft) {
+                moveRight();
+            }
+        });
     }
 
     respawnPlayer() {

@@ -37,7 +37,6 @@ const scenes = {
     menu: () => {
 
         uiManager.displayMainMenu()
-        uiManager.displayMobileControls()
 
         const menuAmbience = play("menu-ambience", {
             volume: 0.3,
@@ -145,8 +144,6 @@ const scenes = {
         player.updateCoinCount(uiManager.coinCountUI)
         uiManager.displayLivesCount()
         player.updateLives(uiManager.livesCountUI)
-        uiManager.displayMobileControls()
-
 
     },
     2: () => {
@@ -248,8 +245,6 @@ const scenes = {
         player.updateCoinCount(uiManager.coinCountUI)
         uiManager.displayLivesCount()
         player.updateLives(uiManager.livesCountUI)
-        uiManager.displayMobileControls();
-
 
     },
     3: () => {
@@ -310,7 +305,6 @@ const scenes = {
         player.updateCoinCount(uiManager.coinCountUI)
         uiManager.displayLivesCount()
         player.updateLives(uiManager.livesCountUI)
-        uiManager.displayMobileControls();
 
     },
     gameover: () => {

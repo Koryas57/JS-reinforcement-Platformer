@@ -108,6 +108,11 @@ class UIManager {
             vec2(center().x, center().y + 100)
         )
 
+        onTouchStart(() => {
+            play("confirm-ui", { speed: 1.5 })
+            go("controls")
+        })
+
 
         onKeyPress("enter", () => {
             play("confirm-ui", { speed: 1.5 })
@@ -202,54 +207,11 @@ class UIManager {
             play("confirm-ui", { speed: 1.5 })
             go(1)
         })
-    }
 
-    displayMobileControls(player) {
-        const directionalCross = add([
-            sprite("ps4-cross"),
-            pos(50, height() - 150),
-            area(),
-            fixed(),
-            z(1000),
-        ]);
-
-        const jumpButton = add([
-            sprite("ps4-jump"),
-            pos(width() - 75, height() - 75),
-            area(),
-            anchor("center"),
-            fixed(),
-            z(1000),
-        ]);
-
-        onKeyDown("left", () => {
-            directionalCross.use(sprite("ps4-left"));
-        });
-
-        onKeyDown("right", () => {
-            directionalCross.use(sprite("ps4-right"));
-        });
-
-        onKeyDown("up", () => {
-            directionalCross.use(sprite("ps4-up"));
-        });
-
-        onKeyDown("down", () => {
-            directionalCross.use(sprite("ps4-down"));
-        });
-
-        onKeyDown("space", () => {
-            jumpButton.use(scale(1.25));
-        });
-
-        onKeyRelease("space", () => {
-            jumpButton.use(scale(1));
-        });
-
-        onKeyRelease(() => {
-            directionalCross.use(sprite("ps4-cross"));
-        });
-
+        onTouchStart(() => {
+            play("confirm-ui", { speed: 1.5 })
+            go(1)
+        })
     }
 
     // Dark background for UI Scoreboard

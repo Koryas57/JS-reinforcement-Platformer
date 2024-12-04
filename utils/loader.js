@@ -15,6 +15,10 @@ export const load = {
         loadSprite("space", "./assets/Space_Key_Dark.png")
 
         loadSprite("ps4-cross", "./assets/PS4_Dpad.png")
+        loadSprite("ps4-up", "./assets/PS4_Dpad_Up.png")
+        loadSprite("ps4-left", "./assets/PS4_Dpad_Left.png")
+        loadSprite("ps4-right", "./assets/PS4_Dpad_Right.png")
+        loadSprite("ps4-down", "./assets/PS4_Dpad_Down.png")
         loadSprite("ps4-jump", "./assets/Wii_A.png")
 
 

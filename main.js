@@ -37,6 +37,7 @@ const scenes = {
     menu: () => {
 
         uiManager.displayMainMenu()
+        uiManager.displayMobileControls()
 
         const menuAmbience = play("menu-ambience", {
             volume: 0.3,
@@ -47,10 +48,12 @@ const scenes = {
         })
     },
     controls: () => {
+
         uiManager.displayControlsMenu()
 
         const menuAmbience = play("menu-ambience", {
             volume: 0.3,
+            seek: 1,
             loop: true,
         })
         onSceneLeave(() => {
@@ -142,6 +145,7 @@ const scenes = {
         player.updateCoinCount(uiManager.coinCountUI)
         uiManager.displayLivesCount()
         player.updateLives(uiManager.livesCountUI)
+        uiManager.displayMobileControls()
 
 
     },
@@ -152,7 +156,7 @@ const scenes = {
             loop: true,
         })
         const castleAmbience = play("castle-ambience", {
-            volume: 0.5,
+            volume: 0.8,
             loop: true,
         })
         onSceneLeave(() => {
@@ -244,6 +248,7 @@ const scenes = {
         player.updateCoinCount(uiManager.coinCountUI)
         uiManager.displayLivesCount()
         player.updateLives(uiManager.livesCountUI)
+        uiManager.displayMobileControls();
 
 
     },
@@ -305,6 +310,7 @@ const scenes = {
         player.updateCoinCount(uiManager.coinCountUI)
         uiManager.displayLivesCount()
         player.updateLives(uiManager.livesCountUI)
+        uiManager.displayMobileControls();
 
     },
     gameover: () => {

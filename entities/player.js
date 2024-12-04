@@ -197,6 +197,14 @@ export class Player {
             this.gameObj.play("idle")
             directionalCross.use(sprite("ps4-cross"));
             this.hasJumpedOnce = false;
+
+            if (this.isMovingLeft && !this.isMovingRight) {
+                moveLeft();
+            }
+
+            if (this.isMovingRight && !this.isMovingLeft) {
+                moveRight();
+            }
         });
 
         // Continuous movement for touch

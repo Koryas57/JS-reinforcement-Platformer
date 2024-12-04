@@ -148,16 +148,11 @@ const scenes = {
     },
     2: () => {
 
-        const lavaAmbience = play("lava-ambience", {
-            volume: 1,
-            loop: true,
-        })
         const castleAmbience = play("castle-ambience", {
             volume: 0.8,
             loop: true,
         })
         onSceneLeave(() => {
-            lavaAmbience.paused = true
             castleAmbience.paused = true
         })
 

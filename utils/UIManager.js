@@ -237,6 +237,11 @@ class UIManager {
             play("confirm-ui")
             go("menu")
         })
+
+        onTouchStart(() => {
+            play("confirm-ui", { speed: 1.5 })
+            go("menu")
+        })
     }
 
     displayEndGameScreen() {
@@ -255,6 +260,11 @@ class UIManager {
 
         onKeyPress("enter", () => {
             play("confirm-ui")
+            go("menu")
+        })
+
+        onTouchStart(() => {
+            play("confirm-ui", { speed: 1.5 })
             go("menu")
         })
 
